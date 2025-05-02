@@ -211,6 +211,25 @@ loki:
           consistent_hash: true
           timeout: {{ .timeout }}
           max_idle_conns: 72
+        {{- with .Values.chunksCache.l2 }}
+        {{- if .enabled }}
+        chunk_store_config:
+          chunk_cache_config:
+            default_validity: {{ .defaultValidity }}
+            background:
+              writeback_goroutines: {{ .writebackParallelism }}
+              writeback_buffer: {{ .writebackBuffer }}
+              writeback_size_limit: {{ .writebackSizeLimit }}
+            memcached:
+              batch_size: {{ .batchSize }}
+              parallelism: {{ .parallelism }}
+            memcached_client:
+              addresses: dnssrvnoa+_memcached-client._tcp.{{ template "loki.fullname" $ }}-chunks-cache-l2.{{ $.Release.Namespace }}.svc
+              consistent_hash: true
+              timeout: {{ .timeout }}
+              max_idle_conns: 72
+        {{- end }}
+        {{- end }}
     {{- end }}
     {{- end }}
 
