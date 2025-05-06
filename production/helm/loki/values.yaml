@@ -214,21 +214,21 @@ loki:
       {{- end }}
       {{- with .Values.chunksCache.l2 }}
       {{- if .enabled }}
-        l2_chunk_cache_handoff: {{ .l2ChunkCacheHandoff }}
-        chunk_cache_config_l2:
-          default_validity: {{ .defaultValidity }}
-          background:
-            writeback_goroutines: {{ .writebackParallelism }}
-            writeback_buffer: {{ .writebackBuffer }}
-            writeback_size_limit: {{ .writebackSizeLimit }}
-          memcached:
-            batch_size: {{ .batchSize }}
-            parallelism: {{ .parallelism }}
-          memcached_client:
-            addresses: dnssrvnoa+_memcached-client._tcp.{{ template "loki.fullname" $ }}-chunks-cache{{ if ne .suffix "" }}{{ .suffix }}{{ end }}.{{ $.Release.Namespace }}.svc
-            consistent_hash: true
-            timeout: {{ .timeout }}
-            max_idle_conns: 72
+      l2_chunk_cache_handoff: {{ .l2ChunkCacheHandoff }}
+      chunk_cache_config_l2:
+        default_validity: {{ .defaultValidity }}
+        background:
+          writeback_goroutines: {{ .writebackParallelism }}
+          writeback_buffer: {{ .writebackBuffer }}
+          writeback_size_limit: {{ .writebackSizeLimit }}
+        memcached:
+          batch_size: {{ .batchSize }}
+          parallelism: {{ .parallelism }}
+        memcached_client:
+          addresses: dnssrvnoa+_memcached-client._tcp.{{ template "loki.fullname" $ }}-chunks-cache{{ if ne .suffix "" }}{{ .suffix }}{{ end }}.{{ $.Release.Namespace }}.svc
+          consistent_hash: true
+          timeout: {{ .timeout }}
+          max_idle_conns: 72
       {{- end }}
       {{- end }}
     {{- end }}
