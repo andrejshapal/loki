@@ -3470,7 +3470,7 @@ chunksCache:
     # -- Append to the name of the resources to make names different for l1 and l2
     suffix: "l2"
     # -- The age of chunks should be transfered from l1 cache to l2
-    l2ChunkCacheHandoff: 3600s #3 days
+    l2ChunkCacheHandoff: 345600s #4 days
     # -- Specifies whether memcached based chunks-cache-l2 should be enabled
     enabled: true
     # -- Batchsize for sending and receiving chunks from chunks cache
