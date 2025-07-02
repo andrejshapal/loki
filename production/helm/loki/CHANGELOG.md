@@ -33,6 +33,10 @@ Entries should include a reference to the pull request that introduced the chang
 
 ## 6.29.0
 
+- [FEATURE] Added support for chunk-cache-l2
+
+## 6.29.0
+
 - [BUGFIX] Inadvertent merge() accumulation of podLabels on various resources
 - [FEATURE] Added support to copy the following headers into X-Query-Tags as key/value pairs:, X-Grafana-User, X-Dashboard-Uid, X-Dashboard-Title, X-Panel-Id, X-Panel-Title, X-Rule-Uid, X-Rule-Name, X-Rule-Folder, X-Rule-Version, X-Rule-Source, X-Rule-Type
 - [BUGFIX] Loki endpoint for Canary assumed gateway was always enabled. Can now be overwritten through values.
