@@ -379,10 +379,10 @@ loki:
   storage:
     # Loki requires a bucket for chunks and the ruler. GEL requires a third bucket for the admin API.
     # Please provide these values if you are using object storage.
-    bucketNames:
-      chunks: FIXME
-      ruler: FIXME
-      admin: FIXME
+    # bucketNames:
+    #   chunks: FIXME
+    #   ruler: FIXME
+    #   admin: FIXME
     type: s3
     s3:
       s3: null
@@ -492,15 +492,9 @@ loki:
       timeout: "500ms"
       default_validity: "12h"
   # -- Check https://grafana.com/docs/loki/latest/configuration/#schema_config for more info on how to configure schemas
-  schemaConfig:
-    configs:
-      - from: 2021-06-05
-        store: boltdb-shipper
-        object_store: gcs
-        schema: v11
-        index:
-          prefix: loki_index_
-          period: 24h
+  schemaConfig: {}
+  # -- a real Loki install requires a proper schemaConfig defined above this, however for testing or playing around
+  # you can enable useTestSchema
   useTestSchema: false
   testSchemaConfig:
     configs:
