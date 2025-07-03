@@ -13,7 +13,7 @@ valuesSection and component are specified separately because helm prefers camelc
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: {{ include "loki.resourceName" (dict "ctx" $.ctx "component" $.component) }}{{ include "loki.memcached.suffix" .suffix }}
+  name: {{ include "loki.resourceName" (dict "ctx" $.ctx "component" $.component "suffix" .suffix) }}
   labels:
     {{- include "loki.labels" $.ctx | nindent 4 }}
     app.kubernetes.io/component: "memcached-{{ $.component }}{{ include "loki.memcached.suffix" .suffix }}"

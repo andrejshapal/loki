@@ -1893,6 +1893,15 @@ null
 </td>
 		</tr>
 		<tr>
+			<td>chunksCache.addresses</td>
+			<td>string</td>
+			<td>Comma separated addresses list in DNS Service Discovery format</td>
+			<td><pre lang="json">
+"dnssrvnoa+_memcached-client._tcp.{{ template \"loki.fullname\" $ }}-chunks-cache{{ include \"loki.memcached.suffix\" .suffix }}.{{ $.Release.Namespace }}.svc"
+</pre>
+</td>
+		</tr>
+		<tr>
 			<td>chunksCache.affinity</td>
 			<td>object</td>
 			<td>Affinity for chunks-cache pods</td>
@@ -2015,13 +2024,14 @@ true
 			<td>l2 memcache configuration</td>
 			<td><pre lang="json">
 {
+  "addresses": "dnssrvnoa+_memcached-client._tcp.{{ template \"loki.fullname\" $ }}-chunks-cache{{ include \"loki.memcached.suffix\" .suffix }}.{{ $.Release.Namespace }}.svc",
   "affinity": {},
   "allocatedMemory": 8192,
   "annotations": {},
   "batchSize": 4,
   "connectionLimit": 16384,
   "defaultValidity": "0s",
-  "enabled": true,
+  "enabled": false,
   "extraArgs": {},
   "extraContainers": [],
   "extraExtendedOptions": "",
@@ -2064,6 +2074,15 @@ true
   "writebackParallelism": 1,
   "writebackSizeLimit": "500MB"
 }
+</pre>
+</td>
+		</tr>
+		<tr>
+			<td>chunksCache.l2.addresses</td>
+			<td>string</td>
+			<td>Comma separated addresses list in DNS Service Discovery format</td>
+			<td><pre lang="json">
+"dnssrvnoa+_memcached-client._tcp.{{ template \"loki.fullname\" $ }}-chunks-cache{{ include \"loki.memcached.suffix\" .suffix }}.{{ $.Release.Namespace }}.svc"
 </pre>
 </td>
 		</tr>
@@ -2126,7 +2145,7 @@ true
 			<td>bool</td>
 			<td>Specifies whether memcached based chunks-cache-l2 should be enabled</td>
 			<td><pre lang="json">
-true
+false
 </pre>
 </td>
 		</tr>
@@ -6820,20 +6839,7 @@ null
 			<td>object</td>
 			<td>Check https://grafana.com/docs/loki/latest/configuration/#schema_config for more info on how to configure schemas</td>
 			<td><pre lang="json">
-{
-  "configs": [
-    {
-      "from": "2021-06-05",
-      "index": {
-        "period": "24h",
-        "prefix": "loki_index_"
-      },
-      "object_store": "gcs",
-      "schema": "v11",
-      "store": "boltdb-shipper"
-    }
-  ]
-}
+{}
 </pre>
 </td>
 		</tr>
@@ -6885,11 +6891,6 @@ null
     "useFederatedToken": false,
     "useManagedIdentity": false,
     "userAssignedId": null
-  },
-  "bucketNames": {
-    "admin": "FIXME",
-    "chunks": "FIXME",
-    "ruler": "FIXME"
   },
   "filesystem": {
     "admin_api_directory": "/var/loki/admin",
@@ -7039,6 +7040,24 @@ null
     "enabled": true
   }
 }
+</pre>
+</td>
+		</tr>
+		<tr>
+			<td>loki.useTestSchema</td>
+			<td>bool</td>
+			<td>a real Loki install requires a proper schemaConfig defined above this, however for testing or playing around you can enable useTestSchema</td>
+			<td><pre lang="json">
+false
+</pre>
+</td>
+		</tr>
+		<tr>
+			<td>lokiCanary.affinity</td>
+			<td>object</td>
+			<td>Affinity for canary pods</td>
+			<td><pre lang="json">
+{}
 </pre>
 </td>
 		</tr>
@@ -10850,15 +10869,6 @@ null
 {
   "type": "RollingUpdate"
 }
-</pre>
-</td>
-		</tr>
-		<tr>
-			<td>resultsCache.suffix</td>
-			<td>string</td>
-			<td>Should not be touched, used for chunksCache</td>
-			<td><pre lang="json">
-""
 </pre>
 </td>
 		</tr>
